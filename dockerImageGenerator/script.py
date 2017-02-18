@@ -1,3 +1,6 @@
+# This script makes the dockerfile from the configure file then generate the docker image(named tempimage).
+# Settings supported: python 2.7, csv dataset.
+
 import subprocess
 import ConfigParser
 
@@ -25,4 +28,3 @@ with open('Dockerfile', 'wb') as f:
 	f.write(command + '\n')
 # Make the docker image
 str = subprocess.call(['sudo', 'docker', 'build', '-t', 'tempimage', '.'])
-# str = subprocess.check_output('sudo')
