@@ -21,25 +21,38 @@
 </head>
 <body>
 
-    <div class="col-md-6">
-        <form action="success" class="dropzone" id="fileZone">{% csrf_token %}
-
-
-        </form>
-
-        <button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">Python 2.7 Packages</div>
+        <div class="panel-body">
+            <div class="checkbox">
+                <label for="id_completed">
+                    <input type="checkbox"> Python 2.7<br>
+                    <input type="checkbox"> Django 1.10.5<br>
+                    <input type="checkbox"> Numpy 1.12.0<br>
+                    <input type="checkbox"> Pandas 0.19.2<br>
+                    <input type="checkbox"> Matplotlib 2.0.0<br>
+                    <input type="checkbox"> IPython 5.2.2<br>
+                    <input type="checkbox"> SciPy 0.18.1<br>
+                </label>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="checkbox">
-        <label for="id_completed">
-            <input type="checkbox"> Python 2.7<br>
-            <input type="checkbox"> Django 1.10.5<br>
-            <input type="checkbox"> Numpy 1.12.0<br>
-            <input type="checkbox"> Pandas 0.19.2<br>
-            <input type="checkbox"> Matplotlib 2.0.0<br>
-            <input type="checkbox"> IPython 5.2.2<br>
-            <input type="checkbox"> SciPy 0.18.1<br>
-        </label>
+
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">Datasets Upload</div>
+        <div class="panel-body">
+            <form action="success" class="dropzone" id="fileZone">{% csrf_token %}
+
+
+            </form>
+
+            <button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>
+        </div>
     </div>
+</div>
 </body>
 </html>
