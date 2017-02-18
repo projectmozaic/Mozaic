@@ -216,7 +216,7 @@
   }
 }
 .dropzone .dz-default.dz-message span {
-  display: none;
+  display: block;
 }
 
 .dropzone.dz-square .dz-default.dz-message {

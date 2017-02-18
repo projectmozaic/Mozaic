@@ -1,0 +1,57 @@
+.big-icon {
+    font-size: 20em;
+}
+
+.dropzone .dz-message {
+  font-size: 52px;
+  text-align: center;
+  color: #A4A4A4;
+}
+.dropzone .dz-message:before {
+  font-family: FontAwesome;
+  content: '\f0ee';
+  display: block;
+  font-size: 4em;
+  line-height: 1;
+}
+.dropzone.dz-started .dz-message {
+  display: none;
+}
+.dropzone .dz-message {
+  display: block;
+}
+.dropzone .dz-default.dz-message {
+  background: none;
+  position: relative;
+  width: auto;
+  height: auto;
+  margin-left: 0;
+  margin-top: 0;
+  left: initial;
+}
+.dropzone .dz-default.dz-message span {
+  display: block;
+  font-size: 28px;
+}
+.dropzone .dz-fallback {
+  text-align: center;
+}
+.dropzone .dz-fallback input[type="file"] {
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.dropzone .dz-preview .dz-remove {
+  background: #DB3833;
+  color: #fff;
+  font-size: 0.9em;
+}
+.dropzone .dz-preview .dz-remove:before {
+  font-family: FontAwesome;
+  content: '\f00d';
+  margin-right: 3px;
+}
+.dropzone .dz-preview .dz-remove:hover {
+  background: #d02a25;
+  color: #fff;
+  cursor: pointer;
+}

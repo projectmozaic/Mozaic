@@ -5,57 +5,29 @@
     <meta charset="UTF-8">
         <title>{{ posted }}</title>
 
-    <!--jquery-->
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous">
     </script>
     <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
-    <!-- Bootstrap -->
+    <link href="{% static "css/dropzone.css" %}" type="text/css" rel="stylesheet" />
+    <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{% static "js/dropzone.js" %}"></script>
-    <link href="{% static "css/dropzone.css"%}" type="text/css" rel="stylesheet" />
-    <script type="text/javascript">
-            Dropzone.options.myDropzone = {
-
-                // Prevents Dropzone from uploading dropped files immediately
-                autoProcessQueue : false,
-
-                init : function() {
-                    var submitButton = document.querySelector("#submit-all")
-                    myDropzone = this;
-
-                    submitButton.addEventListener("click", function() {
-                        myDropzone.processQueue();
-                        // Tell Dropzone to process all queued files.
-                    });
-
-                    // You might want to show the submit button only when
-                    // files are dropped here:
-                    this.on("addedfile", function() {
-                        // Show submit button here and/or inform user to click it.
-                    });
-
-                }
-            };
-    </script>
+    <script src="{% static "js/dropzone.min.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
 </head>
 <body>
 
-<form action="/submitted" class="dropzone">{% csrf_token %}
-<div class="dz-default dz-message">
-    <i class="fa fa-cloud-upload fa-5x" aria-hidden="true"></i>
-    <p>Upload files</p>
-</div>
-<div>
-<button id="submit-all">
-            Submit all files
-</button></div>
-</form>
+    <div class="col-md-6">
+        <form action="success" class="dropzone" id="fileZone">{% csrf_token %}
 
 
+        </form>
 
+        <button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>
+    </div>
 </body>
 </html>
