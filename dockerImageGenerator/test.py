@@ -1,3 +1,4 @@
+# Where students do their assignments based on the original csv file.
 import csv
 
 # print "HelloWorld"
