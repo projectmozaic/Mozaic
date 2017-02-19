@@ -30,3 +30,14 @@ def success(request):
         else:
             form = GenerateForm()
     return render(request, 'index.html', {'posted': "Failed"})
+
+def get_forms(request):
+    if (request.method == "POST"):
+        form = py27Form(request.POST)
+        if form.is_valid():
+            print("checkboxd")
+            return HttpResponseRedirect('/generate')
+
+def generate(request):
+    if request.method == 'POST':
+        print("generate")
