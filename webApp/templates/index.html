@@ -26,16 +26,25 @@
         <div class="panel-heading">Python 2.7 Packages</div>
         <div class="panel-body">
             <div class="checkbox">
-                <label for="id_completed">
-                    <input type="checkbox"> Python 2.7<br>
-                    <input type="checkbox"> Django 1.10.5<br>
-                    <input type="checkbox"> Numpy 1.12.0<br>
-                    <input type="checkbox"> Pandas 0.19.2<br>
-                    <input type="checkbox"> Matplotlib 2.0.0<br>
-                    <input type="checkbox"> IPython 5.2.2<br>
-                    <input type="checkbox"> SciPy 0.18.1<br>
-                </label>
+            <form action="generate" id="CheckForm" method="post">{% csrf_token %}
+                <label><input type="checkbox" name="python27" value="python"> Python 2.7</label>
             </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python27" value="numpy"> Numpy 1.12.0</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python27" value="pandas"> Pandas 0.19.2</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python27" value="matplotlib"> Matplotlib 2.0.0</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python27" value="ipython"> IPython 5.2.2</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python27" value="scipy"> SciPy 0.18.1</label>
+            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -59,17 +68,26 @@
     <div class="panel panel-default">
         <div class="panel-heading">Python 3.4 Packages</div>
         <div class="panel-body">
-            <div class="checkbox">
-                <label for="id_completed">
-                    <input type="checkbox"> Python 3.4<br>
-                    <input type="checkbox"> Django 1.10.5<br>
-                    <input type="checkbox"> Numpy 1.12.0<br>
-                    <input type="checkbox"> Pandas 0.19.2<br>
-                    <input type="checkbox"> Matplotlib 2.0.0<br>
-                    <input type="checkbox"> IPython 5.2.2<br>
-                    <input type="checkbox"> SciPy 0.18.1<br>
-                </label>
+    <div class="checkbox">
+            <form action="generate" id="CheckForm" method="post">{% csrf_token %}
+                <label><input type="checkbox" name="python34" value="python"> Python 3.4</label>
             </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python34" value="numpy"> Numpy 1.12.0</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python34" value="pandas"> Pandas 0.19.2</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python34" value="matplotlib"> Matplotlib 2.0.0</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python34" value="ipython"> IPython 5.2.2</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="python34" value="scipy"> SciPy 0.18.1</label>
+            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -95,23 +113,35 @@
     <div class="panel panel-default">
         <div class="panel-heading">R 3.3.2 Packages</div>
         <div class="panel-body">
+        <div class="checkbox">
+                <label><input type="checkbox" name="rcheck" value="r332"> R 3.3.2</label>
+            </div>
             <div class="checkbox">
-                <label for="id_completed">
-                    <input type="checkbox"> R 3.3.2<br>
-                    <input type="checkbox"> Forecast 7.3<br>
-                    <input type="checkbox"> Plyr 1.8.4<br>
-                    <input type="checkbox"> Lubridate 1.6.0<br>
-                    <input type="checkbox"> Ggplot2 2.2.1<br>
-                    <input type="checkbox"> Qcc 2.6<br>
-                    <input type="checkbox"> Reshape2 1.4.2<br>
-                    <input type="checkbox"> RandomForest 4.6-12<br>
-                </label>
+                <label><input type="checkbox" name="rcheck" value="forecast"> Forecast 7.3</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="rcheck" value="plyr"> Plyr 1.8.4</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="rcheck" value="lubridate"> Lubridate 1.6.0</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="rcheck" value="ggplot"> Ggplot2 2.2.1</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="rcheck" value="qcc"> Qcc 2.6</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="rcheck" value="reshape"> Reshape2 1.4.2</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="rcheck" value="randomforest"> RandomForest 4.6.12</label>
             </div>
         </div>
     </div>
 </div>
 
-<center><button type="submit" form="envcreate" id="generate" value="Create">Create</button></center>
+<center><button type="submit" form="CheckForm" id="create" value="Create">Create</button></center>
 
 </body>
 </html>
