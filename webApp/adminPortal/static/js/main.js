@@ -4,7 +4,7 @@ $(document).ready(function() {
     if ($('.dropzone').length > 0) {
 
         $(".dropzone").dropzone({
-            url: "success",
+            url: "generate",
 			uploadMultiple: true,
             addRemoveLinks: true,
             autoProcessQueue: false,
@@ -12,7 +12,7 @@ $(document).ready(function() {
 			dictDefaultMessage: 'Drop datasets here to upload',
 			init: function() {
                 var zone = this;
-                $('#generate').click(function(){
+                $('#create').click(function(){
                         zone.processQueue();
                 });
 			}

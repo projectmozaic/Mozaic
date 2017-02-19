@@ -17,6 +17,7 @@ def index(request):
     else:
         return render(request, 'index.html', {})
 
+#Ignore for now -- this will be for serving the image back
 def success(request):
     if request.method == 'POST':
         form = GenerateForm(request.POST)
@@ -45,10 +46,17 @@ def generate(request):
     if request.method == 'POST':
         py27 = request.POST.getlist('python27')
         py34 = request.POST.getlist('python34')
+        print "Python 2.7:"
         for packages in py27:
             print packages
+        print "Python 3.4:"
         for packages in py34:
             print packages
+
+        print "Files:"
+        for item in request.FILES.getlist("file[]"):
+            print item.read()
+
         return render(request, 'index.html', {'posted': "Valid"})
     #else:
     return render(request, 'index.html', {})

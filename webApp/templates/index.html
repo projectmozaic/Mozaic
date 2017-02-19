@@ -44,22 +44,6 @@
             <div class="checkbox">
                 <label><input type="checkbox" name="python27" value="scipy"> SciPy 0.18.1</label>
             </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Datasets Upload</div>
-        <div class="panel-body">
-            <form action="success" class="dropzone" id="fileZone">{% csrf_token %}
-
-
-            </form>
-
-            <button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>
         </div>
     </div>
 </div>
@@ -69,7 +53,6 @@
         <div class="panel-heading">Python 3.4 Packages</div>
         <div class="panel-body">
     <div class="checkbox">
-            <form action="generate" id="CheckForm" method="post">{% csrf_token %}
                 <label><input type="checkbox" name="python34" value="python"> Python 3.4</label>
             </div>
             <div class="checkbox">
@@ -137,6 +120,20 @@
             <div class="checkbox">
                 <label><input type="checkbox" name="rcheck" value="randomforest"> RandomForest 4.6.12</label>
             </div>
+        </div>
+    </div>
+</div>
+</form>
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">Datasets Upload</div>
+        <div class="panel-body">
+            <form action="success" class="dropzone" id="fileZone">{% csrf_token %}
+
+
+            </form>
+
+            <!--<button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>-->
         </div>
     </div>
 </div>
