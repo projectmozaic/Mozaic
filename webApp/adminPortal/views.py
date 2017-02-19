@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import GenerateForm
+from .forms import CheckForm
 import process
 
 
@@ -31,13 +32,23 @@ def success(request):
             form = GenerateForm()
     return render(request, 'index.html', {'posted': "Failed"})
 
-def get_forms(request):
-    if (request.method == "POST"):
+"""def get_forms(request):
+    if request.method == 'POST':
         form = py27Form(request.POST)
         if form.is_valid():
             print("checkboxd")
             return HttpResponseRedirect('/generate')
+    else:
+        return render(request, 'index.html', {})"""
 
 def generate(request):
     if request.method == 'POST':
-        print("generate")
+        py27 = request.POST.getlist('python27')
+        py34 = request.POST.getlist('python34')
+        for packages in py27:
+            print packages
+        for packages in py34:
+            print packages
+        return render(request, 'index.html', {'posted': "Valid"})
+    #else:
+    return render(request, 'index.html', {})

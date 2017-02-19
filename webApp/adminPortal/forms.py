@@ -7,5 +7,5 @@ class GenerateForm(forms.Form):
 #class PythonPackagesForm(forms.ModelForm):
  #   PythonPackages = forms.BooleanField()
 
-class py27Form(forms.Form):
+class CheckForm(forms.Form):
 	test = forms.BooleanField()
