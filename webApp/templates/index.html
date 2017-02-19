@@ -76,15 +76,42 @@
 
 <div class="col-md-6">
     <div class="panel panel-default">
-        <div class="panel-heading">Github Repositories</div>
+        <div class="panel-heading">Additional installations</div>
         <div class="panel-body">
-            forms
+            <div class="form-group">
+                <label for="gitrepo">Git Repository URL</label>
+                <input type="text" class="form-control" id="gitrepo">
+            </div>
+            <div class="form-group">
+                <label for="aptget">apt get</label>
+                <input type="text" class="form-control" id="aptget">
+            </div>
 
         </div>
     </div>
 </div>
 
-<!--<button type="submit" form="fileZone" id="generate" value="Create">Create</button>-->
+<div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">R 3.3.2 Packages</div>
+        <div class="panel-body">
+            <div class="checkbox">
+                <label for="id_completed">
+                    <input type="checkbox"> R 3.3.2<br>
+                    <input type="checkbox"> Forecast 7.3<br>
+                    <input type="checkbox"> Plyr 1.8.4<br>
+                    <input type="checkbox"> Lubridate 1.6.0<br>
+                    <input type="checkbox"> Ggplot2 2.2.1<br>
+                    <input type="checkbox"> Qcc 2.6<br>
+                    <input type="checkbox"> Reshape2 1.4.2<br>
+                    <input type="checkbox"> RandomForest 4.6-12<br>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<center><button type="submit" form="envcreate" id="generate" value="Create">Create</button></center>
 
 </body>
 </html>
