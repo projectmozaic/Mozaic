@@ -21,7 +21,7 @@ with open('Dockerfile', 'wb') as f:
 	f.write('ADD ' + script + ' /\n')
 	# Set command
 	if lang == 'python2.7':
-		command = 'CMD pip install ' + package  + ' && \\\n	' + 'python ' + script
+		command = 'RUN pip install ' + package  + '\n' + 'CMD python ' + script
 	f.write(command + '\n')
 # Make the docker image
 str = subprocess.call('docker build -t tempimage .', shell=True)
