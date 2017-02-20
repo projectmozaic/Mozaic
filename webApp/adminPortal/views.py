@@ -46,13 +46,20 @@ def generate(request):
     if request.method == 'POST':
         py27 = request.POST.getlist('python27')
         py34 = request.POST.getlist('python34')
+        rpacks = request.POST.getlist('rcheck')
+        gitrepo = request.POST.get('gitrepo')
+        aptget = request.POST.get('aptget')
         print "Python 2.7:"
         for packages in py27:
             print packages
         print "Python 3.4:"
         for packages in py34:
             print packages
-
+        print "R 3.3.2:"
+        for packages in rpacks:
+            print packages;
+        print "git repo:", gitrepo
+        print "apt get:", aptget
         print "Files:"
         for item in request.FILES.getlist("file[]"):
             print item.read()
