@@ -18,4 +18,9 @@ $(document).ready(function() {
 			}
         });
     } // end if dropzone exist
+
+    $(".lang").click(function(){
+        var item = $(this).parent().parent().parent().next().find("input").prop('disabled', function(i, v) { return !v; });
+        console.log(item);
+    });
 });
