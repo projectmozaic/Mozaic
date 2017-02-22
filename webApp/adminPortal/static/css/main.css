@@ -1,3 +1,15 @@
+body{
+  margin: 0;
+  background: url('../img/bgtile.png') repeat;
+}
+
+.panel > .panel-heading {
+  background-image: none;
+  background-color: red;
+  color: white;
+  overflow: auto;
+}
+
 .input-group{
     margin-bottom: 2px;
 }
@@ -16,9 +28,6 @@ i {
 
 .big-icon {
   font-size: 20em;
-}
-.panel {
-  overflow: auto;
 }
 
 #loading {
