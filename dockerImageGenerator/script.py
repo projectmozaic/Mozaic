@@ -9,7 +9,7 @@ config.read(configFilePath)
 lang = config.get('Section', 'lang')
 dataset = config.get('Section','dataset')
 script = config.get('Section', 'script')
-package = config.get('Section', 'package')
+packages = config.get('Section', 'package')
 # Write Dockerfile
 with open('Dockerfile', 'wb') as f:
 	# Set Language
@@ -21,7 +21,12 @@ with open('Dockerfile', 'wb') as f:
 	f.write('ADD ' + script + ' /\n')
 	# Set command
 	if lang == 'python2.7':
-		command = 'RUN pip install ' + package  + '\n' + 'CMD python ' + script
-	f.write(command + '\n')
+		packages = packages.split(',')
+		for package in packages:
+			package = package.strip()
+			package_command = 'RUN pip install ' + package  + '\n'
+			f.write(package_command)
+	exe_command = 'CMD python ' + script + '\n'
+	f.write(exe_command + '\n')
 # Make the docker image
 str = subprocess.call('docker build -t tempimage .', shell=True)
