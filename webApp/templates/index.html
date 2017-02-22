@@ -20,8 +20,11 @@
     <script src="{% static "js/main.js" %}"></script>
 </head>
 <body>
-<img src='../adminPortal/static/img/webtitle.png'/>
-<form action="generate" id="CheckForm" method="post">{% csrf_token %}
+<div class="row">
+
+</div>
+<img src={% static 'img/webtitle.png' %}/>
+<form action="generate" class="dropzone" id="fileZone" method="post">{% csrf_token %}
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -135,13 +138,6 @@
             </div>
             </div>
 
-
-            <!--<input type="text" class="form-control" id="gitrepo" name="gitrepo">
-            </div>
-            <div class="form-group">
-                <label for="aptget">apt get</label>
-                <input type="text" class="form-control" id="aptget" name="aptget">
-            </div>!-->
             </div>
         </div>
     </div>
@@ -153,17 +149,18 @@
     <div class="panel panel-default">
         <div class="panel-heading">Datasets Upload</div>
         <div class="panel-body">
-            <form action="success.html" class="dropzone" id="fileZone">{% csrf_token %}
+            <div class="dropzone-previews"></div>
+            <!--<form class="dropzone" id="fileZone">{% csrf_token %}
 
 
-            </form>
+            </form>-->
 
             <!--<button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>-->
         </div>
     </div>
 </div>
 
-<center><button type="submit" form="CheckForm" id="create" value="Create">Create</button></center>
+<center><button type="submit" form="fileZone" id="create" value="Create">Create</button></center>
 
 </body>
 </html>

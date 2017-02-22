@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import GenerateForm
 from .forms import CheckForm
-import process
+from .process import makeDockerFile
 
-import os, tempfile
+import tempfile
+from subprocess import call
 
 
 # Create your views here.
@@ -43,23 +44,15 @@ def generate(request):
         rpacks = request.POST.getlist('rcheck')
         gitrepo = request.POST.getlist('gitRepo')
         aptget = request.POST.getlist('aptget')
-        #For debugging purposes!
-        print "Python 2.7:"
-        for packages in py27:
-            print packages
-        print "Python 3.4:"
-        for packages in py34:
-            print packages
-        print "R 3.3.2:"
-        for packages in rpacks:
-            print packages;
-        print "git repo:" + str(gitrepo)
-        print "apt get:" + str(aptget)
-        print "Files:"
-        for item in request.FILES.getlist("file[]"):
-            print item.read()
 
-        return render(request, 'index.html', {'posted': "Valid"})
+        fileDirectory = tempfile.mkdtemp()
+        for item in request.FILES.getlist("file[]"):
+            #print item.name
+            with open(fileDirectory+"/"+item.name, 'wb+') as destination:
+                destination.write(item.read())
+
+        makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory)
+        return redirect('/process', fileDirectory="fileDirectory")
     #else:
     return render(request, 'index.html', {})
 

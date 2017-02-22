@@ -12,8 +12,11 @@ $(document).ready(function() {
 			dictDefaultMessage: 'Drop datasets here to upload',
 			init: function() {
                 var zone = this;
-                $('#create').click(function(){
-                        zone.processQueue();
+                $('#create').click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    zone.processQueue();
+
                 });
 			}
         });
