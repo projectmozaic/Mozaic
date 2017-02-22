@@ -1,7 +1,16 @@
-.big-icon {
-    font-size: 20em;
+* {
+  .border-radius(0) !important;
 }
-
+#field {
+  margin-bottom:20px;
+  width: 100%;
+}
+.big-icon {
+  font-size: 20em;
+}
+.panel {
+  overflow: auto;
+}
 .dropzone .dz-message {
   font-size: 52px;
   text-align: center;
