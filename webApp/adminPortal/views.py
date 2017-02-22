@@ -4,6 +4,10 @@ from .forms import GenerateForm
 from .forms import CheckForm
 import process
 
+import os, tempfile, zipfile
+from django.http import HttpResponse
+from wsgiref.util import FileWrapper
+
 
 # Create your views here.
 
@@ -13,7 +17,7 @@ def index(request):
         if form.is_valid():
             print request.FILES['file']
             print request.FILES['file'].read()
-            return HttpResponseRedirect('/success')
+            return HttpResponseRedirect('/success.html')
     else:
         return render(request, 'index.html', {})
 
@@ -31,16 +35,8 @@ def success(request):
             return render(request, 'index.html', {'posted': "Valid"})
         else:
             form = GenerateForm()
-    return render(request, 'index.html', {'posted': "Failed"})
+    return render(request, 'success.html')
 
-"""def get_forms(request):
-    if request.method == 'POST':
-        form = py27Form(request.POST)
-        if form.is_valid():
-            print("checkboxd")
-            return HttpResponseRedirect('/generate')
-    else:
-        return render(request, 'index.html', {})"""
 
 def generate(request):
     if request.method == 'POST':
@@ -49,6 +45,7 @@ def generate(request):
         rpacks = request.POST.getlist('rcheck')
         gitrepo = request.POST.get('gitrepo')
         aptget = request.POST.get('aptget')
+        #For debugging purposes!
         print "Python 2.7:"
         for packages in py27:
             print packages
@@ -67,3 +64,6 @@ def generate(request):
         return render(request, 'index.html', {'posted': "Valid"})
     #else:
     return render(request, 'index.html', {})
+
+def process(request):
+    return render(request, 'process.html')

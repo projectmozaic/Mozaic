@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>Processing... </title>
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous">
+    </script>
+    <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
+    <link href="{% static "css/dropzone.css" %}" type="text/css" rel="stylesheet" />
+    <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static "js/dropzone.min.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+</head>
+<body>
+
+<div id="loading">
+<i class="fa fa-refresh fa-spin fa-fw" id="loadingIcon"></i><br><br>
+<span> Generating your Docker image...</span>
+    </div>
+</body>
+</html>
