@@ -2,14 +2,6 @@ body{
   margin: 0;
   background: url('../img/bgtile.png') repeat;
 }
-
-.panel > .panel-heading {
-  background-image: none;
-  background-color: red;
-  color: white;
-  overflow: auto;
-}
-
 .input-group{
     margin-bottom: 2px;
 }
@@ -92,4 +84,12 @@ i {
   background: #d02a25;
   color: #fff;
   cursor: pointer;
+}
+.panel-default > .panel-body{
+  background-color: #E2EDE8 !important;
+  overflow: auto;
+}
+.panel-default > .panel-heading {
+  background-color: #CCDED8 !important;
+  overflow: auto;
 }
