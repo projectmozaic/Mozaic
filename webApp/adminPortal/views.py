@@ -4,9 +4,7 @@ from .forms import GenerateForm
 from .forms import CheckForm
 import process
 
-import os, tempfile, zipfile
-from django.http import HttpResponse
-from wsgiref.util import FileWrapper
+import os, tempfile
 
 
 # Create your views here.
@@ -43,8 +41,8 @@ def generate(request):
         py27 = request.POST.getlist('python27')
         py34 = request.POST.getlist('python34')
         rpacks = request.POST.getlist('rcheck')
-        gitrepo = request.POST.get('gitrepo')
-        aptget = request.POST.get('aptget')
+        gitrepo = request.POST.getlist('gitRepo')
+        aptget = request.POST.getlist('aptget')
         #For debugging purposes!
         print "Python 2.7:"
         for packages in py27:
@@ -55,8 +53,8 @@ def generate(request):
         print "R 3.3.2:"
         for packages in rpacks:
             print packages;
-        print "git repo:", gitrepo
-        print "apt get:", aptget
+        print "git repo:" + str(gitrepo)
+        print "apt get:" + str(aptget)
         print "Files:"
         for item in request.FILES.getlist("file[]"):
             print item.read()

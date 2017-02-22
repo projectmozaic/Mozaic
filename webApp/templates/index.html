@@ -106,7 +106,6 @@
             </div>
         </div>
     </div>
-    </form>
 </div>
 
 
@@ -114,22 +113,29 @@
     <div class="panel panel-default">
         <div class="panel-heading">Additional installations</div>
         <div class="panel-body">
-            <div class="form-group">
-                <div class="container">
-                    <div class="row">
-                        <input type="hidden" name="count" value="1" />
-                        <div class="control-group" id="fields">
-                            <label class="control-label" for="field1">Git Repository</label>
-                            <div class="controls" id="profs"> 
-                                <form class="input-append">
-                                 <div id="field" ><input autocomplete="off" class="input" id="field1" name="girepo" type="text" placeholder="URL" data-items="8"/><button id="b1" class="btn add-more" type="button">+</button></div>
-                                </form>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--<input type="text" class="form-control" id="gitrepo" name="gitrepo">
+            <div>
+            <label for="gitrepo">Git Repository URL</label>
+            <div class="input-group">
+                <input type="text" name="gitRepo" class="form-control" placeholder="Git Repo...">
+                <span class="input-group-btn">
+                <button class="btn btn-secondary addRepo" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </span>
+            </div>
+            </div>
+
+            <div>
+                <br>
+            <label for="gitrepo">apt get </label>
+            <div class="input-group">
+                <input type="text" name="aptget" class="form-control" placeholder="Package Name">
+                <span class="input-group-btn">
+                <button class="btn btn-secondary addAptget" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </span>
+            </div>
+            </div>
+
+
+            <!--<input type="text" class="form-control" id="gitrepo" name="gitrepo">
             </div>
             <div class="form-group">
                 <label for="aptget">apt get</label>
@@ -140,25 +146,7 @@
     </div>
 </div>
 
-
-
-<div class="col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Additional installations</div>
-        <div class="panel-body">
-            <div class="form-group">
-                <label for="gitrepo">Git Repository URL</label>
-                <input type="text" class="form-control" id="gitrepo" name="gitrepo">
-            </div>
-            <div class="form-group">
-                <label for="aptget">apt get</label>
-                <input type="text" class="form-control" id="aptget" name="aptget">
-            </div>
-
-        </div>
-    </div>
-</div>
-
+    </form>
 </form>
 <div class="col-md-6">
     <div class="panel panel-default">

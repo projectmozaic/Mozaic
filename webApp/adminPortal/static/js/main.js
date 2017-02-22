@@ -23,33 +23,52 @@ $(document).ready(function() {
         var item = $(this).parent().parent().parent().next().find("input").prop('disabled', function(i, v) { return !v; });
         console.log(item);
     });
-});
 
-
-//code for dynamic form fields
-//http://bootsnipp.com/snippets/featured/dynamic-form-fields-add-amp-remove
-$(document).ready(function(){
-    var next = 1;
-    $(".add-more").click(function(e){
+    $(document).on("click", ".addRepo", function (e) {
         e.preventDefault();
-        var addto = "#field" + next;
-        var addRemove = "#field" + (next);
-        next = next + 1;
-        var newIn = '<input autocomplete="off" class="input form-control" id="field' + next + '" name="field' + next + '" type="text">';
-        var newInput = $(newIn);
-        var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >-</button></div><div id="field">';
-        var removeButton = $(removeBtn);
-        $(addto).after(newInput);
-        $(addRemove).after(removeButton);
-        $("#field" + next).attr('data-source',$(addto).attr('data-source'));
-        $("#count").val(next);  
-        
-            $('.remove-me').click(function(e){
-                e.preventDefault();
-                var fieldNum = this.id.replace("remove","")
-                var fieldID = "#field" + fieldNum;
-                $(this).remove();
-                $(fieldID).remove();
-            });
+        $(this).toggleClass('addRepo removeRepo');
+        $(this).html('<i class="fa fa-minus" aria-hidden="true"></i>');
+        var addElement = '<div class="input-group"> <input type="text" name="gitRepo" class="form-control" placeholder="Git Repo..."> \
+                <span class="input-group-btn"> \
+                <button class="btn btn-secondary addRepo" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>\
+                </span>\
+            </div>';
+        var item = $(this).parent().parent();
+        item.after(addElement);
+
+    });
+
+    $(document).on("click", ".removeRepo", function (e) {
+        e.preventDefault();
+        var item = $(this).parent().parent();
+        console.log(item);
+        $(this).parent().parent().remove();
+
+    });
+
+    $(document).on("click", ".addAptget", function (e) {
+        e.preventDefault();
+        $(this).toggleClass('addAptget removeAptget');
+        $(this).html('<i class="fa fa-minus" aria-hidden="true"></i>');
+        var addElement = '<div class="input-group"> <input type="text" name="aptget" class="form-control" placeholder="Package Name"> \
+                <span class="input-group-btn"> \
+                <button class="btn btn-secondary addAptget" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>\
+                </span>\
+            </div>';
+        var item = $(this).parent().parent();
+        item.after(addElement);
+
+    });
+
+    $(document).on("click", ".removeAptget", function (e) {
+        e.preventDefault();
+        var item = $(this).parent().parent();
+        console.log(item);
+        $(this).parent().parent().remove();
+
     });
 });
+
+
+
+

@@ -1,10 +1,19 @@
-* {
-  .border-radius(0) !important;
+.input-group{
+    margin-bottom: 2px;
 }
-#field {
-  margin-bottom:20px;
-  width: 100%;
+
+.addRepo {
+  color: green;
 }
+
+.removeRepo {
+  color: red;
+}
+
+i {
+  color: white;
+}
+
 .big-icon {
   font-size: 20em;
 }
