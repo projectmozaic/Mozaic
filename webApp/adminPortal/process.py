@@ -1,6 +1,8 @@
 #External functions we might need for processing
 import tempfile
 import os
+import hashlib
+
 
 from subprocess import call
 import shutil
@@ -10,14 +12,14 @@ def makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory):
     tmpDocker.write("FROM ubuntu:latest\n") #Base image is ubuntu
     tmpDocker.write('''
 RUN apt-get update -q && apt-get install -yqq \\
+    apt-utils \\
     git \\
     ssh \\
     gcc \\
     make \\
     build-essential \\
     libkrb5-dev \\
-    sudo \\
-    apt-utils
+    sudo
 ''')
 
     if (len(py27) > 0 and py27[0] == "python") :
@@ -49,13 +51,19 @@ RUN apt-get update -q && apt-get install -yqq \\
     tmpDocker.seek(0)
     print tmpDocker.read()
     tmpDocker.close()
+
+def makeDockerImage(fileDirectory):
     with cd(fileDirectory):
-        #call("ls -al", shell=True)
+        call("ls -al", shell=True)
+        m = hashlib.md5()
+        m.update(fileDirectory)
         # This path for calling the docker daemon will probably be changed on our instance
         # but this is the default path for now on my mac
+        tempfile = m.hexdigest().lower()
+        print tempfile
         call("eval $(/usr/local/bin/docker-machine env default) &&"+
-             " sleep 2 && docker build -t tempimage .", shell=True)
-    shutil.rmtree(fileDirectory)
+             " sleep 2 && docker build -t "+tempfile+" .", shell=True)
+        call("eval $(/usr/local/bin/docker-machine env default) && docker save "+tempfile+" > tempimg.tar", shell=True)
 
 class cd:
     """Context manager for changing the current working directory"""

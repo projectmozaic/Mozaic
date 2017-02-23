@@ -1,10 +1,12 @@
 // if dropzone exist
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
+
+
     if ($('#fileZone').length > 0) {
 
         $("#fileZone").dropzone({
-            url: "generate",
+            //url: "generate",
 			uploadMultiple: true,
             addRemoveLinks: true,
             clickable: "#previewZone",
@@ -16,7 +18,6 @@ $(document).ready(function() {
                 var zone = this;
                 $('#create').click(function(e){
                     e.preventDefault();
-                    e.stopPropagation();
                     zone.processQueue();
                 });
 
@@ -29,7 +30,10 @@ $(document).ready(function() {
                         $(".dz-default").show();
                     }
                 });
-			}
+			},
+			success: function(file, response){
+                window.location.replace("process");
+            }
         });
     } // end if dropzone exist
 
@@ -40,6 +44,7 @@ $(document).ready(function() {
 
     $(document).on("click", ".addRepo", function (e) {
         e.preventDefault();
+        e.stopPropagation();
         $(this).toggleClass('addRepo removeRepo');
         $(this).html('<i class="fa fa-minus" aria-hidden="true"></i>');
         var addElement = '<div class="input-group"> <input type="text" name="gitRepo" class="form-control" placeholder="Git Repo..."> \
@@ -54,6 +59,7 @@ $(document).ready(function() {
 
     $(document).on("click", ".removeRepo", function (e) {
         e.preventDefault();
+        e.stopPropagation();
         var item = $(this).parent().parent();
         console.log(item);
         $(this).parent().parent().remove();
@@ -62,6 +68,7 @@ $(document).ready(function() {
 
     $(document).on("click", ".addAptget", function (e) {
         e.preventDefault();
+        e.stopPropagation();
         $(this).toggleClass('addAptget removeAptget');
         $(this).html('<i class="fa fa-minus" aria-hidden="true"></i>');
         var addElement = '<div class="input-group"> <input type="text" name="aptget" class="form-control" placeholder="Package Name"> \

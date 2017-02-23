@@ -18,6 +18,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{% static "js/dropzone.min.js" %}"></script>
     <script src="{% static "js/main.js" %}"></script>
+    <script>
+
+    $(document).ready(function(){
+        $.ajax({
+                    url: '/process',
+                    data: {
+                        processing: true
+                    },
+                    success: function(data) {
+                        $("#loading").html('<i class="fa fa-check-circle" id="loadingIcon" aria-hidden="true"></i><br><br> \
+                                <span> Done! Ready to download. </span>');
+                        $("title").html("Success!");
+                        window.location.replace("success");
+                    },
+                    error: function (response) {
+                        alert(response);
+
+                    }
+                });
+
+            }
+
+        );
+
+    </script>
 </head>
 <body>
 

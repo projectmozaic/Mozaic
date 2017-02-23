@@ -1,40 +1,30 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-from .forms import GenerateForm
-from .forms import CheckForm
-from .process import makeDockerFile
+from django.http import HttpResponseRedirect, HttpResponse
+from django.utils.encoding import smart_str
+from django.template import loader
+from .process import makeDockerFile, makeDockerImage
+from django.views.static import serve
+import os
 
 import tempfile
 from subprocess import call
+import shutil
 
 
 # Create your views here.
 
 def index(request):
-    if (request.method == "POST"):
-        form = GenerateForm(request.POST)
-        if form.is_valid():
-            print request.FILES['file']
-            print request.FILES['file'].read()
-            return HttpResponseRedirect('/success.html')
-    else:
-        return render(request, 'index.html', {})
+    return render(request, 'index.html', {})
 
 #Ignore for now -- this will be for serving the image back
 def success(request):
-    if request.method == 'POST':
-        form = GenerateForm(request.POST)
-
-        for item in request.FILES.getlist("file[]"):
-            print item.read()
-
-        if form.is_valid():
-            for item in request.FILES.getlist("file[]"):
-                print item.read()
-            return render(request, 'index.html', {'posted': "Valid"})
-        else:
-            form = GenerateForm()
-    return render(request, 'success.html')
+    tempfile = request.session["temp"]+"/tempimg.tar"
+    response = HttpResponse(open(tempfile, "rb").read(), content_type='application/x-tar')
+    response['Content-Encoding'] = 'tar'
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str("tempimg.tar")
+    response['X-Sendfile'] = smart_str(tempfile)
+    #shutil.rmtree(fileDirectory)
+    return response
 
 
 def generate(request):
@@ -52,9 +42,17 @@ def generate(request):
                 destination.write(item.read())
 
         makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory)
-        return redirect('/process', fileDirectory="fileDirectory")
+        request.session['temp'] = fileDirectory
+        print request.session['temp']
+        return HttpResponse()
     #else:
     return render(request, 'index.html', {})
 
 def process(request):
+    if request.GET.get("processing"):
+        if request.session['temp']:
+            makeDockerImage(request.session['temp'])
+            return HttpResponse()
+        else:
+            return "Error"
     return render(request, 'process.html')
