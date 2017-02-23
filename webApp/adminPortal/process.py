@@ -27,7 +27,7 @@ RUN apt-get update -q && apt-get install -yqq \\
 
     if (len(py34) > 0 and py34[0] == "python"): #Python3.4 is default installed
         tmpDocker.write("RUN apt-get install -y python-pip3\n")
-        for packages in py27[1:]:
+        for packages in py34[1:]:
             tmpDocker.write("RUN pip3 " + packages + "\n")
 
     for gitURL in gitrepo:

@@ -28,7 +28,7 @@
 <img src={% static 'img/webtitle.png' %}/>
 <br><br>
 </div>
-<form action="generate" class="dropzone" id="fileZone" method="post">{% csrf_token %}
+<form action="generate" class=dropzone id="fileZone" method="post">{% csrf_token %}
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -147,23 +147,22 @@
     </div>
 </div>
 
-    </form>
-</form>
 <div class="col-md-6">
     <div class="panel panel-default">
         <div class="panel-heading">Datasets Upload</div>
-        <div class="panel-body">
-            <div class="dropzone-previews"></div>
-            <!--<form class="dropzone" id="fileZone">{% csrf_token %}
+        <div class="panel-body dropzone-previews dz-clickable" id="previewZone">
+            <div id="zone" class="dz-clickable ">
+            <div class="dz-default dz-message">
+                <span>Drop files here to upload</span>
+                </div>
+            </div>
 
-
-            </form>-->
 
             <!--<button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>-->
         </div>
     </div>
 </div>
-
+</form>
 <center><button type="submit" form="fileZone" id="create" value="Create">Create</button></center>
 
 </body>

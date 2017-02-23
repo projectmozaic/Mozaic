@@ -1,12 +1,14 @@
 // if dropzone exist
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
-    if ($('.dropzone').length > 0) {
+    if ($('#fileZone').length > 0) {
 
-        $(".dropzone").dropzone({
+        $("#fileZone").dropzone({
             url: "generate",
 			uploadMultiple: true,
             addRemoveLinks: true,
+            clickable: "#previewZone",
+            previewsContainer: "#previewZone",
             autoProcessQueue: false,
             dictResponseError: 'File Upload Error.',
 			dictDefaultMessage: 'Drop datasets here to upload',
@@ -16,7 +18,16 @@ $(document).ready(function() {
                     e.preventDefault();
                     e.stopPropagation();
                     zone.processQueue();
+                });
 
+                this.on("addedfile", function(file) {
+                    $(".dz-default").hide();
+                });
+
+                this.on("removedfile", function(file) {
+                    if (zone.getQueuedFiles().length == 0) {
+                        $(".dz-default").show();
+                    }
                 });
 			}
         });
