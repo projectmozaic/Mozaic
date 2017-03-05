@@ -4,7 +4,7 @@ import ConfigParser
 # Read conf file
 config = ConfigParser.RawConfigParser()
 configFilePath = 'config.conf'
-goldConfig = '../goldimage/goldconfig.conf'
+goldConfig = '../goldImage/goldconfig.conf'
 config.read(configFilePath)
 
 lang = config.get('Section', 'lang')
