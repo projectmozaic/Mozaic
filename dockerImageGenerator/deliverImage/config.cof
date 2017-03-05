@@ -2,4 +2,4 @@
 lang = python2.7
 dataset = mycsv.csv
 script = test.py
-package = numpy scipy
+package = numpy scipy matplotlib
