@@ -35,7 +35,7 @@ with open('Dockerfile', 'wb') as f:
 	f.write('ADD ' + dataset + ' /\n')
 	# Set script
 	f.write('ADD ' + script + ' /\n')
-	# Set command
+	# delete un-needed packages
 	if lang == 'python2.7':
 		if len(strdelete)>0:
 			command = 'RUN pip uninstall -y ' + strdelete  + '\n' + 'CMD python ' + script
