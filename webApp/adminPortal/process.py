@@ -7,7 +7,7 @@ import hashlib
 from subprocess import call
 import shutil
 
-def makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory):
+def makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile):
     tmpDocker = open(fileDirectory+"/Dockerfile", "w+")
     tmpDocker.write("FROM ubuntu:latest\n") #Base image is ubuntu
     tmpDocker.write('''

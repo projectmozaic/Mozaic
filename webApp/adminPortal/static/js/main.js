@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     if ($('#fileZone').length > 0) {
 
-        $("#fileZone").dropzone({
+        if ($("#fileZone").dropzone.length > 0)({
             //url: "generate",
 			uploadMultiple: true,
             addRemoveLinks: true,
@@ -88,6 +88,13 @@ $(document).ready(function() {
         $(this).parent().parent().remove();
 
     });
+
+    $('#filebutton').on('change', ':file', function(){
+        var input = $(this);
+        console.log(input.val());
+        label = input.val().replace(/^.*?([^\\\/]*)$/, '$1');
+        document.getElementById("packagefile").value = label;
+    })
 });
 
 
