@@ -1,0 +1,5 @@
+[Section]
+lang = python2.7
+dataset = mycsv.csv
+script = test.py
+package = numpy scipy matplotlib
