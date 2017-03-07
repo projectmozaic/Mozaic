@@ -34,9 +34,7 @@ def generate(request):
         rpacks = request.POST.getlist('rcheck')
         gitrepo = request.POST.getlist('gitRepo')
         aptget = request.POST.getlist('aptget')
-        packageFile = request.FILES.getlist('fileselect')
-        print request.FILES;
-        print packageFile;
+        packageFile = request.FILES.getlist('fileselect')[0];
 
         fileDirectory = tempfile.mkdtemp()
         for item in request.FILES.getlist("file[]"):

@@ -28,7 +28,7 @@
 <img src={% static 'img/webtitle.png' %}/>
 <br><br>
 </div>
-<form action="generate" class=dropzone id="fileZone" method="post">{% csrf_token %}
+<form action="generate" class=dropzone id="fileZone" method="post" enctype="multipart/form-data">{% csrf_token %}
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">

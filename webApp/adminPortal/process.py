@@ -2,6 +2,8 @@
 import tempfile
 import os
 import hashlib
+import csv
+import codecs
 
 
 from subprocess import call
@@ -21,6 +23,20 @@ RUN apt-get update -q && apt-get install -yqq \\
     libkrb5-dev \\
     sudo
 ''')
+
+    if (len(packageFile) > 0):
+        #parse csv files
+        if (packageFile.name[-3:] == "csv"):
+            data = [row for row in csv.reader(packageFile.read().splitlines())]
+            for item in data:
+                if item[0].lower() == "python 2.7":
+                    tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
+                    for packages in item[1:]:
+                        tmpDocker.write("RUN pip "+packages+"\n")
+                if item[0].lower() == "python 3.4":
+                    tmpDocker.write("RUN apt-get install -y python-pip3\n")
+                    for packages in item[1:]:
+                        tmpDocker.write("RUN pip3 " + packages + "\n")
 
     if (len(py27) > 0 and py27[0] == "python") :
         tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
