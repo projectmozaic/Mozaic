@@ -4,8 +4,6 @@ import os
 import hashlib
 import csv
 import json
-
-
 from subprocess import call
 import shutil
 
@@ -53,7 +51,6 @@ RUN apt-get update -q && apt-get install -yqq \\
                 installs = [item.strip() for item in packages["python 3.4"][0].split(",")]
                 for package in installs:
                     tmpDocker.write("RUN pip3 " + package + "\n")
-
 
     if (len(py27) > 0 and py27[0] == "python") :
         tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
