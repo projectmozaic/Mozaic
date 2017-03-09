@@ -2,12 +2,12 @@
 import tempfile
 import os
 import hashlib
-
-
+import csv
+import json
 from subprocess import call
 import shutil
 
-def makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory):
+def makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile):
     tmpDocker = open(fileDirectory+"/Dockerfile", "w+")
     tmpDocker.write("FROM ubuntu:latest\n") #Base image is ubuntu
     tmpDocker.write('''
@@ -21,6 +21,36 @@ RUN apt-get update -q && apt-get install -yqq \\
     libkrb5-dev \\
     sudo
 ''')
+
+    if (len(packageFile) > 0):
+        #parse csv files
+        if (packageFile.name[-3:] == "csv"):
+            data = [row for row in csv.reader(packageFile.read().splitlines())]
+            for item in data:
+                if item[0].lower() == "python 2.7":
+                    tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
+                    for package in item[1:]:
+                        tmpDocker.write("RUN pip "+package.lower()+"\n")
+                if item[0].lower() == "python 3.4":
+                    tmpDocker.write("RUN apt-get install -y python-pip3\n")
+                    for package in item[1:]:
+                        tmpDocker.write("RUN pip3 " + package + "\n")
+
+        if (packageFile.name[-4:] == "json"):
+            data = json.loads(packageFile.read())
+            packages = {}
+            for key, value in data.iteritems():
+                packages[key.lower()] = value
+            if "python 2.7" in packages:
+                tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
+                installs = [item.strip() for item in packages["python 2.7"][0].split(",")]
+                for package in installs:
+                    tmpDocker.write("RUN pip "+package.lower()+"\n")
+            if "python 3.4" in packages:
+                tmpDocker.write("RUN apt-get install -y python-pip3\n")
+                installs = [item.strip() for item in packages["python 3.4"][0].split(",")]
+                for package in installs:
+                    tmpDocker.write("RUN pip3 " + package + "\n")
 
     if (len(py27) > 0 and py27[0] == "python") :
         tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
