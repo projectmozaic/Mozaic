@@ -77,7 +77,8 @@ RUN apt-get update -q && apt-get install -yqq \\
     for file in files:
         if file != "Dockerfile":
             tmpDocker.write("ADD "+"./"+file+" /files\n")
-
+            
+    tmpDocker.write("VOLUME /files\n")
     tmpDocker.seek(0)
     print tmpDocker.read()
     tmpDocker.close()
