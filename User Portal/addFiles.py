@@ -1,7 +1,6 @@
 from subprocess import call
 import os
 import sys
-import tempfile
 import Tkinter as tk
 import tkMessageBox
 imageName = None
@@ -62,14 +61,15 @@ try:
         print >>sys.stderr, "Subprocess was terminated by signal", -retcode
     else:
         print >>sys.stderr, "Subprocess returned", retcode
-    fp = tempfile.TemporaryFile()
-    fp.write('FROM '+imageName + ':latest')
-    for i in filesToAdd:
-        fp.write('ADD ' + i + ' /\n')
+    # fp = tempfile.TemporaryFile()
+    with open('Dockerfile', 'wb') as fp:
+	    fp.write('FROM '+imageName + ':latest\n')
+	    for i in filesToAdd:
+	        fp.write('ADD ' + i + ' /\n')
     # fp.write('ADD ' + filesToAdd + ' /\n')
     ok = call('docker build -t tempimage1 .', shell=True)
     if ok < 0:
         print >>sys.stderr, "Subprocess was terminated by signal", -ok
-    fp.close()
+    os.remove('Dockerfile')
 except OSError as e:
     print >>sys.stderr, "Execution failed:", e
