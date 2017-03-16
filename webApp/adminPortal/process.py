@@ -46,11 +46,13 @@ RUN apt-get update -q && apt-get install -yqq \\
                 installs = [item.strip() for item in packages["python 2.7"][0].split(",")]
                 for package in installs:
                     tmpDocker.write("RUN pip "+package.lower()+"\n")
+                    print("RUN pip "+package.lower()+"\n")
             if "python 3.4" in packages:
                 tmpDocker.write("RUN apt-get install -y python-pip3\n")
                 installs = [item.strip() for item in packages["python 3.4"][0].split(",")]
                 for package in installs:
                     tmpDocker.write("RUN pip3 " + package + "\n")
+                    print("RUN pip3 " + package + "\n")
 
     if (len(py27) > 0 and py27[0] == "python") :
         tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
