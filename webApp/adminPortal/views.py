@@ -36,6 +36,7 @@ def generate(request):
         aptget = request.POST.getlist('aptget')
         packageFile = request.FILES.getlist('fileselect')[0];
 
+        print request.FILES;
         fileDirectory = tempfile.mkdtemp()
         for item in request.FILES.getlist("file[]"):
             #print item.name

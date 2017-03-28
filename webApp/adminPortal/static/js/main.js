@@ -91,7 +91,6 @@ $(document).ready(function() {
 
     $('#filebutton').on('change', ':file', function(){
         var input = $(this);
-        console.log(input.val());
         label = input.val().replace(/^.*?([^\\\/]*)$/, '$1');
         document.getElementById("packagefile").value = label;
     })
