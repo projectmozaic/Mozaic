@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     if ($('#fileZone').length > 0) {
 
-        if ($("#fileZone").dropzone.length > 0)({
+        $("#fileZone").dropzone({
             //url: "generate",
 			uploadMultiple: true,
             addRemoveLinks: true,
