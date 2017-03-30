@@ -13,7 +13,7 @@ command = raw_input(prompt)
 commandParse = command.split()
 
 if (len(commandParse) < 2):
-	sys.exit("Invalid command to run mode.")
+	sys.exit("Invalid command to run model.")
 
 script = "./" + commandParse[1]
 if (os.path.isfile(script) == False):
