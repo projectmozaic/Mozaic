@@ -1,4 +1,5 @@
 import os.path
+from subprocess import call
 import sys
 
 prompt = "> "
@@ -23,6 +24,12 @@ if (len(commandParse) == 3):
 	model = "./" + commandParse[2]
 	if (os.path.isfile(model) == False):
 		sys.exit("Data file does not exist.")
+
+
+call(commandParse);
+
+
+
 
 print "Select one of the following options for running your model: AWS, MOC, OpenStack, None"
 cloud = raw_input(prompt)

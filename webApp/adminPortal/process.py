@@ -14,6 +14,8 @@ def makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFi
 RUN apt-get update -q && apt-get install -yqq \\
     apt-utils \\
     git \\
+    vim \\
+    nano \\
     ssh \\
     gcc \\
     make \\
