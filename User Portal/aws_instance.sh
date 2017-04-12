@@ -1,7 +1,7 @@
 #!/bin/bash
 # define variables
-key_id="AKIAJJP733QM2AGEE2YA"
-access_key="rhuCQ/n63u3H35A1EtEvV1oqp8bSkHu/Bn3UFPrI"
+key_id=
+access_key=
 region_name="us-west-2"
 key_name="1-key"
 echo $key_id
