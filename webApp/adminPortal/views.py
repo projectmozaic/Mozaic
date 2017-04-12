@@ -58,3 +58,6 @@ def process(request):
         else:
             return "Error"
     return render(request, 'process.html')
+
+def config(request):
+    return render(request, 'config.html', {})
