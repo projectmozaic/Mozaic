@@ -11,162 +11,26 @@
       crossorigin="anonymous">
     </script>
     <link href={% static "css/font-awesome.css" %} rel="stylesheet" type="text/css">
-    <link href="{% static "css/dropzone.css" %}" type="text/css" rel="stylesheet" />
     <link href={% static "css/main.css" %} rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{% static "js/dropzone.js" %}"></script>
-    <script src="{% static "js/main.js" %}"></script>
 </head>
+
 <body>
-<div class="row">
-
-</div>
 <div class="col-md-12">
-<br>
-<img src={% static 'img/webtitle.png' %}/>
-<br><br>
-</div>
-<form action="generate" class=dropzone id="fileZone" method="post" enctype="multipart/form-data">{% csrf_token %}
-<div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="checkbox" style="display: inline";>
-                <label><input type="checkbox" name="python27" class="lang" value="python" style="float:inherit"> Python 2.7</label>
-            </div>
-        </div>
-        <div class="panel-body" >
-            <div class="checkbox">
-                <label><input type="checkbox" name="python27" disabled="true" value="numpy"> Numpy 1.12.0</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python27" disabled="true" value="pandas"> Pandas 0.19.2</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python27" disabled="true" value="matplotlib"> Matplotlib 2.0.0</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python27" disabled="true" value="ipython"> IPython 5.2.2</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python27" disabled="true" value="scipy"> SciPy 0.18.1</label>
-            </div>
-        </div>
-    </div>
+    <br>
+    <img src={% static 'img/webtitle.png' %}/>
+    <br><br>
 </div>
 
-<div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-             <div class="checkbox" style="display: inline";>
-                <label><input type="checkbox" name="python34" value="python" class="lang" style="float:inherit"> Python 3.4</label>
-            </div>
-        </div>
-        <div class="panel-body" >
-            <div class="checkbox">
-                <label><input type="checkbox" name="python34" disabled="true" value="numpy"> Numpy 1.12.0</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python34" disabled="true" value="pandas"> Pandas 0.19.2</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python34" disabled="true" value="matplotlib"> Matplotlib 2.0.0</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python34" disabled="true" value="ipython"> IPython 5.2.2</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="python34" disabled="true" value="scipy"> SciPy 0.18.1</label>
-            </div>
-        </div>
-    </div>
-</div>
+<form action="configedit" id="config" method="post" enctype="multipart/form-data">{% csrf_token %}
 
-<div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <div class="checkbox" style="display: inline";>
-            <label><input type="checkbox" name="rcheck" value="r332" class="lang" style="float: inherit"> R 3.3.2</label>
-            </div>
-        </div>
-        <div class="panel-body" >
-            <div class="checkbox">
-                <label><input type="checkbox" name="rcheck" disabled="true" value="forecast"> Forecast 7.3</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="rcheck" disabled="true" value="plyr"> Plyr 1.8.4</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="rcheck" disabled="true" value="lubridate"> Lubridate 1.6.0</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="rcheck" disabled="true" value="ggplot"> Ggplot2 2.2.1</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="rcheck" disabled="true" value="qcc"> Qcc 2.6</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="rcheck" disabled="true" value="reshape"> Reshape2 1.4.2</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="rcheck" disabled="true" value="randomforest"> RandomForest 4.6.12</label>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Additional installations</div>
-        <div class="panel-body">
-            <div>
-            <label for="gitrepo">Git Repository URL</label>
-            <div class="input-group">
-                <input type="text" name="gitRepo" class="form-control" placeholder="Git Repo...">
-                <span class="input-group-btn">
-                <button class="btn btn-secondary addRepo" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                </span>
-            </div>
-            </div>
-
-            <div>
-                <br>
-            <label for="gitrepo">apt get </label>
-            <div class="input-group">
-                <input type="text" name="aptget" class="form-control" placeholder="Package Name">
-                <span class="input-group-btn">
-                <button class="btn btn-secondary addAptget" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                </span>
-            </div>
-            </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Datasets Upload</div>
-        <div class="panel-body dropzone-previews dz-clickable" id="previewZone">
-            <div id="zone" class="dz-clickable ">
-            <div class="dz-default dz-message">
-                <span>Drop files here to upload</span>
-                </div>
-            </div>
-
-
-            <!--<button type="submit" form="fileZone" id="generate" value="Submit">Submit</button>-->
-        </div>
-    </div>
-</div>
-
-<div class="col-md-6">
+<div class="col-md-12">
 	<div class="panel panel-default">
-		<div class="panel-heading">Package Selection File</div>
-		<div class="panel-body"> Upload a CSV or JSON file to specify the packages to include in the Docker image.
+		<div class="panel-heading">Configuration File</div>
+		<div class="panel-body"> 
+        Upload a CSV or JSON file to specify the image configuration.
 		<br><br>
         <div class="input-group">
           <input type="text" class="form-control" id="packagefile" readonly>
@@ -177,6 +41,18 @@
           </label>
         </div>
 	</div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">Configuration Settings</div>
+        <div class="panel-body"> Make changes below to your configuration settings.
+        <br><br>
+        <div class="form-group">
+            <textarea class="form-control" rows="10" id="configinput"></textarea>
+        </div>
+        </div>
     </div>
 </div>
 
