@@ -1,0 +1,1 @@
+{"Main Command": "model.py", "Python 2.7": ["scipy"], "Vendor": "AWS", "Python 3.4": ["pandas, ipython"], "Data Set": ["data.csv"], "Code Repo": ["https://github.com/BU-CS-CE-528-2017/Data-Science-in-the-Cloud"], "Credentials": {"username": "Username", "password": "Password"}}

@@ -3,8 +3,9 @@ from . import views
 
 urlpatterns = [
     url(r'^$|index$', views.index, name='index'),
-    url(r'^success|SUCCESS$', views.success, name="success"),
-    url(r'^generate|Generate$', views.generate, name="generate"),
-    url(r'^process|PROCESS$', views.process, name="generate"),
-    url(r'^config|CONFIG$', views.config, name="config"),
+    url(r'^success$|SUCCESS$', views.success, name="success"),
+    url(r'^generate$|Generate$', views.generate, name="generate"),
+    url(r'^process$|PROCESS$', views.process, name="generate"),
+    url(r'^config$|CONFIG$', views.config, name="config"),
+    url(r'^configedit$|CONFIGEDIT$', views.configedit, name="configedit")
 ]

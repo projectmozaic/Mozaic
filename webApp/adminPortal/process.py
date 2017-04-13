@@ -48,13 +48,11 @@ RUN apt-get update -q && apt-get install -yqq \\
                 installs = [item.strip() for item in packages["python 2.7"][0].split(",")]
                 for package in installs:
                     tmpDocker.write("RUN pip "+package.lower()+"\n")
-                    print("RUN pip "+package.lower()+"\n")
             if "python 3.4" in packages:
                 tmpDocker.write("RUN apt-get install -y python-pip3\n")
                 installs = [item.strip() for item in packages["python 3.4"][0].split(",")]
                 for package in installs:
                     tmpDocker.write("RUN pip3 " + package + "\n")
-                    print("RUN pip3 " + package + "\n")
 
     if (len(py27) > 0 and py27[0] == "python") :
         tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
@@ -100,6 +98,61 @@ def makeDockerImage(fileDirectory):
         call("eval $(/usr/local/bin/docker-machine env default) &&"+
              " sleep 2 && docker build -t "+tempfile+" .", shell=True)
         call("eval $(/usr/local/bin/docker-machine env default) && docker save "+tempfile+" > tempimg.tar", shell=True)
+
+def parseConfig(fileDirectory, configString, fileName):
+    #overwrite json file with new data
+    with open(fileName, 'w') as outfile:
+        json.dump(json.loads(configString), outfile)
+
+    #create docker file
+    tmpDocker = open(fileDirectory+"/Dockerfile", "w+")
+    tmpDocker.write("FROM ubuntu:latest\n") #Base image is ubuntu
+    tmpDocker.write('''
+    RUN apt-get update -q && apt-get install -yqq \\
+        apt-utils \\
+        git \\
+        vim \\
+        nano \\
+        ssh \\
+        gcc \\
+        make \\
+        build-essential \\
+        libkrb5-dev \\
+        sudo
+    ''')
+
+    data = json.loads(configString)
+    group = {}
+    for key, value in data.iteritems():
+        group[key.lower()] = value
+    if "python 2.7" in group:
+        tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
+        installs = [item.strip() for item in group["python 2.7"][0].split(",")]
+        for package in installs:
+            tmpDocker.write("RUN pip "+package.lower()+"\n")
+    if "python 3.4" in group:
+        tmpDocker.write("RUN apt-get install -y python-pip3\n")
+        installs = [item.strip() for item in group["python 3.4"][0].split(",")]
+        for package in installs:
+            tmpDocker.write("RUN pip3 " + package + "\n")
+    if "code repo" in group:
+        installs = [item.strip() for item in group["code repo"][0].split(",")]
+        for repo in installs:
+            url = repo.strip()
+            if url != '':
+                tmpDocker.write("RUN git clone "+ url+ "\n")
+    if "data set" in group:
+        print "data set"
+    if "main command" in group:
+        print "main command"
+            
+    #tmpDocker.write("VOLUME /files\n")
+    tmpDocker.write("ADD commands.py /\n")
+    tmpDocker.write("ADD " + fileName + " /")
+    tmpDocker.seek(0)
+    print tmpDocker.read()
+    tmpDocker.close()
+
 
 class cd:
     """Context manager for changing the current working directory"""

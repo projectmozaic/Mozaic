@@ -12,13 +12,10 @@ $(document).ready(function(){
     		reader.onload = function(e){
     			if (reader.fileName.indexOf(".json") != -1){
     				var json = JSON.parse(e.target.result);
-    				$("#configinput").text(JSON.stringify(json));
-    			}
-    			else if (reader.fileName.indexOf(".csv") != -1){
-    				$("#configinput").text(e.target.result);
+    				$("#configinput").text(JSON.stringify(json, null, 2));
     			}
     			else{
-    				alert("Only .json and .csv files accepted.");
+    				alert("Only .json files accepted.");
     				return;
     			}
     		};

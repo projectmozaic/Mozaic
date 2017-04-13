@@ -31,7 +31,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Configuration File</div>
 		<div class="panel-body"> 
-        Upload a CSV or JSON file to specify the image configuration.
+        Upload a JSON file to specify the image configuration.
 		<br><br>
         <div class="input-group">
           <input type="text" class="form-control" id="packagefile" readonly>
@@ -51,14 +51,15 @@
         <div class="panel-body"> Make changes below to your configuration settings.
         <br><br>
         <div class="form-group">
-            <textarea class="form-control" rows="10" id="configinput"></textarea>
+            <textarea class="form-control" rows="10" id="configinput" name="configinput"></textarea>
         </div>
         </div>
     </div>
 </div>
 
+<center><button type="submit" form="config" id="create" value="Create">Create</button></center>
 </form>
-<center><button type="submit" form="fileZone" id="create" value="Create">Create</button></center>
+
 
 </body>
 </html>

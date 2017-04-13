@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.encoding import smart_str
 from django.template import loader
-from .process import makeDockerFile, makeDockerImage
+from .process import makeDockerFile, makeDockerImage, parseConfig
 from django.views.static import serve
 import os
 
@@ -15,6 +15,9 @@ import shutil
 
 def index(request):
     return render(request, 'index.html', {})
+
+def config(request):
+    return render(request, 'config.html', {})
 
 #Ignore for now -- this will be for serving the image back
 def success(request):
@@ -36,7 +39,6 @@ def generate(request):
         aptget = request.POST.getlist('aptget')
         packageFile = request.FILES.getlist('fileselect')[0];
 
-        print request.FILES;
         fileDirectory = tempfile.mkdtemp()
         for item in request.FILES.getlist("file[]"):
             #print item.name
@@ -59,5 +61,10 @@ def process(request):
             return "Error"
     return render(request, 'process.html')
 
-def config(request):
+def configedit(request):
+    if request.method == 'POST':
+        text = request.POST.get('configinput')
+        configfile = request.FILES.getlist('fileselect')[0].name;
+        fileDirectory = tempfile.mkdtemp()
+        parseConfig(fileDirectory, text, configfile)
     return render(request, 'config.html', {})
