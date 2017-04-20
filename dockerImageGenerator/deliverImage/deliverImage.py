@@ -39,6 +39,9 @@ with open('Dockerfile', 'wb') as f:
 	f.write('ADD ' + dataset + ' /\n')
 	# Set script
 	f.write('ADD ' + script + ' /\n')
+	# Add new activies
+	f.write('ADD ' + 'Dockerfile' + ' /\n')
+	f.write('RUN ' + 'python act_log.py' + '\n')
 	# delete un-needed packages
 	if lang == 'python2.7':
 		if len(strinstall)>0:
