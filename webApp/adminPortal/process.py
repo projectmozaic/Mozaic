@@ -6,6 +6,7 @@ import csv
 import json
 from subprocess import call
 import shutil
+import sys
 
 def makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile):
     tmpDocker = open(fileDirectory+"/Dockerfile", "w+")
@@ -85,6 +86,86 @@ RUN apt-get update -q && apt-get install -yqq \\
     tmpDocker.seek(0)
     print tmpDocker.read()
     tmpDocker.close()
+
+
+def updateImage(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile, imageFile):
+    try:
+        retcode = call('docker load -i ' + imageFile.name + '.tar', shell=True)
+        if retcode < 0:
+            print >>sys.stderr, "Subprocess was terminated by signal", -retcode2
+        else:
+            print >>sys.stderr, "Subprocess returned", retcode
+        # fp = tempfile.TemporaryFile()
+        with open('Dockerfile', 'wb') as tmpDocker:
+            tmpDocker.write('FROM '+imageFile.name + ':latest\n')
+            files = os.listdir(fileDirectory)
+            for file in files:
+                if file != "":
+                    tmpDocker.write('ADD ' + i + ' /\n')
+
+                if (len(packageFile) > 0):
+                    #parse csv files
+                    if (packageFile.name[-3:] == "csv"):
+                        data = [row for row in csv.reader(packageFile.read().splitlines())]
+                        for item in data:
+                            if item[0].lower() == "python 2.7":
+                                tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
+                                for package in item[1:]:
+                                    tmpDocker.write("RUN pip "+package.lower()+"\n")
+                            if item[0].lower() == "python 3.4":
+                                tmpDocker.write("RUN apt-get install -y python-pip3\n")
+                                for package in item[1:]:
+                                    tmpDocker.write("RUN pip3 " + package + "\n")
+
+                    if (packageFile.name[-4:] == "json"):
+                        data = json.loads(packageFile.read())
+                        packages = {}
+                        for key, value in data.iteritems():
+                            packages[key.lower()] = value
+                        if "python 2.7" in packages:
+                            tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
+                            installs = [item.strip() for item in packages["python 2.7"][0].split(",")]
+                            for package in installs:
+                                tmpDocker.write("RUN pip "+package.lower()+"\n")
+                        if "python 3.4" in packages:
+                            tmpDocker.write("RUN apt-get install -y python-pip3\n")
+                            installs = [item.strip() for item in packages["python 3.4"][0].split(",")]
+                            for package in installs:
+                                tmpDocker.write("RUN pip3 " + package + "\n")
+
+                if (len(py27) > 0 and py27[0] == "python") :
+                    tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
+                    for packages in py27[1:]:
+                        tmpDocker.write("RUN pip "+packages+"\n")
+
+                if (len(py34) > 0 and py34[0] == "python"): #Python3.4 is default installed
+                    tmpDocker.write("RUN apt-get install -y python-pip3\n")
+                    for packages in py34[1:]:
+                        tmpDocker.write("RUN pip3 " + packages + "\n")
+
+                for gitURL in gitrepo:
+                    url = gitURL.strip()
+                    if url != '':
+                        tmpDocker.write("RUN git clone "+ url+ "\n")
+
+                for package in aptget:
+                    package = package.strip()
+                    if package != '':
+                        tmpDocker.write("RUN apt-get install "+ package+ "\n")
+
+            """if pipPackge != "":
+                fp.write('RUN pip install ' + pipPackge  + '\n')
+            if git_packages_url != "":
+                fp.write("RUN git clone "+ git_packages_url+ "\n")
+            if aptGet_packages != "":
+                fp.write("RUN apt-get install "+ aptGet_packages + "\n")"""
+        # fp.write('ADD ' + filesToAdd + ' /\n')
+        ok = call('docker build -t tempimage1 .', shell=True)
+        if ok < 0:
+            print >>sys.stderr, "Subprocess was terminated by signal", -ok
+        os.remove('Dockerfile')
+    except OSError as e:
+        print >>sys.stderr, "Execution failed:", e
 
 def makeDockerImage(fileDirectory):
     with cd(fileDirectory):

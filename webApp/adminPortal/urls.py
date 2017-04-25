@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^process$|PROCESS$', views.process, name="generate"),
     url(r'^config$|CONFIG$', views.config, name="config"),
     url(r'^configedit$|CONFIGEDIT$', views.configedit, name="configedit"),
-    url(r'^student$|STUDENT$', views.student, name="student")
+    url(r'^student$|STUDENT$', views.student, name="student"),
+    url(r'^imagestudent$|IMAGESTUDENT', views.imagestudent, name="student")
 ]

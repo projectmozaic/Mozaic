@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.encoding import smart_str
 from django.template import loader
-from .process import makeDockerFile, makeDockerImage, parseConfig
+from .process import makeDockerFile, makeDockerImage, parseConfig, updateImage
 from django.views.static import serve
 import os
 
@@ -18,6 +18,9 @@ def index(request):
 
 def config(request):
     return render(request, 'config.html', {})
+
+def student(request):
+    return render(request, 'student.html', {})
 
 #Ignore for now -- this will be for serving the image back
 def success(request):
@@ -69,5 +72,26 @@ def configedit(request):
         parseConfig(fileDirectory, text, configfile)
     return render(request, 'config.html', {})
 
-def student(request):
+def imagestudent(request):
+    if request.method == 'POST':
+        print "hello there"
+        py27 = request.POST.getlist('python27')
+        py34 = request.POST.getlist('python34')
+        rpacks = request.POST.getlist('rcheck')
+        gitrepo = request.POST.getlist('gitRepo')
+        aptget = request.POST.getlist('aptget')
+        imageFile = request.FILES.getlist('fileselect')[0]
+        if len(request.FILES.getlist('fileselect')) > 1:
+            packageFile = request.FILES.getlist('fileselect')[1]
+
+        fileDirectory = tempfile.mkdtemp()
+        for item in request.FILES.getlist("file[]"):
+            with open(fileDirectory+"/"+item.name, 'wb+') as destination:
+                destination.write(item.read())
+
+        updateImage(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile, imageFile)
+        request.session['temp'] = fileDirectory
+        print request.session['temp']
+        return HttpResponse()
+
     return render(request, 'student.html')

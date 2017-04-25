@@ -28,7 +28,7 @@
 <img src={% static 'img/webtitle.png' %}/>
 <br><br>
 </div>
-<form action="studentadd" class=dropzone id="fileZone" method="post" enctype="multipart/form-data">{% csrf_token %}
+<form action="imagestudent" class=dropzone id="fileZone" method="post" enctype="multipart/form-data">{% csrf_token %}
 <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading">Image Path</div>
@@ -198,7 +198,7 @@
 </div>
 
 </form>
-<center><button type="submit" form="fileZone" id="submit" value="Create">Submit</button></center>
+<center><button type="submit" form="fileZone" id="submit" value="Submit">Submit</button></center>
 
 </body>
 </html>
