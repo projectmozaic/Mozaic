@@ -28,7 +28,24 @@
 <img src={% static 'img/webtitle.png' %}/>
 <br><br>
 </div>
-<form action="generate" class=dropzone id="fileZone" method="post" enctype="multipart/form-data">{% csrf_token %}
+<form action="studentadd" class=dropzone id="fileZone" method="post" enctype="multipart/form-data">{% csrf_token %}
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">Image Path</div>
+        <div class="panel-body"> 
+        Specify the path to the image. 
+        <br><br>
+        <div class="input-group">
+          <input type="text" class="form-control" id="imagefile" readonly>
+          <label class="input-group-btn">
+            <span class="btn btn-primary" id="fileselect">
+                Open<input id="fileselect" type="file" name="fileselect" style="display:none;">
+            </span>
+          </label>
+        </div>
+    </div>
+    </div>
+</div>
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -181,7 +198,7 @@
 </div>
 
 </form>
-<center><button type="submit" form="fileZone" id="create" value="Create">Create</button></center>
+<center><button type="submit" form="fileZone" id="submit" value="Create">Submit</button></center>
 
 </body>
 </html>

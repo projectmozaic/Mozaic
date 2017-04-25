@@ -68,3 +68,6 @@ def configedit(request):
         fileDirectory = tempfile.mkdtemp()
         parseConfig(fileDirectory, text, configfile)
     return render(request, 'config.html', {})
+
+def student(request):
+    return render(request, 'student.html')
