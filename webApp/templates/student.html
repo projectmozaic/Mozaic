@@ -20,6 +20,13 @@
     <script src="{% static "js/student.js" %}"></script>
 </head>
 <body>
+
+<ul class="nav nav-tabs">
+  <li role="presentation"><a href="/">Admin Portal</a></li>
+  <li role="presentation"><a href="/config">Configuration</a></li>
+  <li role="presentation"  class="active"><a href="/student">User Portal</a></li>
+</ul>
+
 <div class="row">
 
 </div>
@@ -39,7 +46,7 @@
           <input type="text" class="form-control" id="imagefile" readonly>
           <label class="input-group-btn">
             <span class="btn btn-primary" id="fileselect">
-                Open<input id="fileselect" type="file" name="fileselect" style="display:none;">
+                Open<input id="imageselect" type="file" name="imageselect" style="display:none;">
             </span>
           </label>
         </div>
