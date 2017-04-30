@@ -71,6 +71,6 @@ See also the list of [contributors](https://github.com/BU-CS-CE-528-2017/Data-Sc
 
 ## Acknowledgments
 
-* A big thank you to our mentor Srikanth Krishnamurthy [sriboston](https://github.com/sriboston)
-* Another equally big thank you to our i(nstructors Orran Krieger [okrieg](https://github.com/okrieg), Ata Turk [ataturk](https://github.com/ataturk), Peter Desnoyers, and Michael Daitzman
+* A big thank you to our mentor Srikanth Krishnamurthy - [sriboston](https://github.com/sriboston)
+* Another equally big thank you to our i(nstructors Orran Krieger - [okrieg](https://github.com/okrieg), Ata Turk - [ataturk](https://github.com/ataturk), Peter Desnoyers, and Michael Daitzman
 * Thank you to our classmates who provided us with feedback and kept us on our toes
