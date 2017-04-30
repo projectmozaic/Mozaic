@@ -84,19 +84,25 @@ def configedit(request):
 
 def imagestudent(request):
     if request.method == 'POST':
+        try:
+            imageFile = request.FILES.getlist('fileselect')[0]
+        except:
+            return render(request, 'student.html', {"error":"No image exists"})
         py27 = request.POST.getlist('python27')
         py34 = request.POST.getlist('python34')
         rpacks = request.POST.getlist('rcheck')
         gitrepo = request.POST.getlist('gitRepo')
         aptget = request.POST.getlist('aptget')
-        imageFile = request.FILES.getlist('fileselect')[0]
         if len(request.FILES.getlist('fileselect')) > 1:
             packageFile = request.FILES.getlist('fileselect')[1]
+        else:
+            packageFile = ""
 
         fileDirectory = tempfile.mkdtemp()
-        for item in request.FILES.getlist("file[]"):
-            with open(fileDirectory+"/"+item.name, 'wb+') as destination:
-                destination.write(item.read())
+        if (len(request.FILES.getlist("file[]")) > 0):
+            for item in request.FILES.getlist("file[]"):
+                with open(fileDirectory+"/"+item.name, 'wb+') as destination:
+                    destination.write(item.read())
 
         updateImage(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile, imageFile)
         request.session['temp'] = fileDirectory
