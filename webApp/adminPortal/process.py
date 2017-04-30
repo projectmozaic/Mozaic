@@ -91,7 +91,10 @@ RUN apt-get update -q && apt-get install -yqq \\
 
 def updateImage(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile, imageFile):
     try:
-        retcode = call('docker load -i ' + imageFile.name + '.tar', shell=True)
+        if (imageFile.name[-3:] != "tar"):
+            retcode = call('docker load -i ' + imageFile.name + '.tar', shell=True)
+        else:
+            retcode = call('docker load -i ' + imageFile.name, shell=True)
         if retcode < 0:
             print >>sys.stderr, "Subprocess was terminated by signal", -retcode2
         else:
