@@ -79,9 +79,10 @@ RUN apt-get update -q && apt-get install -yqq \\
 
     for file in files:
         if file != "Dockerfile":
-            tmpDocker.write("ADD "+"./"+file+" /files\n")
+            tmpDocker.write("ADD "+"./"+file+" /src\n")
             
     #tmpDocker.write("VOLUME /files\n")
+    call(["mv", "commands.py", fileDirectory])
     tmpDocker.write("ADD commands.py /")
     tmpDocker.seek(0)
     print tmpDocker.read()
