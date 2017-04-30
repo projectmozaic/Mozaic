@@ -14,7 +14,6 @@ Python 2.7, Django 1.10.5, Docker
 apt-get install python2.7
 apt-get install python-pip
 pip install django==1.10.5
-
 ```
 To install Docker we refer you to their documentation:
 [Get Docker](https://docs.docker.com/engine/installation/)
@@ -33,7 +32,7 @@ git pull https://github.com/BU-CS-CE-528-2017/Data-Science-in-the-Cloud
 To run the website, navigate to the webApp folder and run manage.py
 
 ```
-cd ~/Data-Science-in-the-Cloud/webApp
+cd ~/your/path/Data-Science-in-the-Cloud/webApp
 python manage.py runserver 8000
 ```
 
@@ -55,7 +54,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/BU-CS-CE-528-2017/Data-Science-in-the-Cloud) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/BU-CS-CE-528-2017/Data-Science-in-the-Cloud/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
@@ -72,5 +71,9 @@ See also the list of [contributors](https://github.com/BU-CS-CE-528-2017/Data-Sc
 ## Acknowledgments
 
 * A big thank you to our mentor Srikanth Krishnamurthy - [sriboston](https://github.com/sriboston)
-* Another equally big thank you to our i(nstructors Orran Krieger - [okrieg](https://github.com/okrieg), Ata Turk - [ataturk](https://github.com/ataturk), Peter Desnoyers, and Michael Daitzman
+* Another equally big thank you to our instructors:
+	* Orran Krieger - [okrieg](https://github.com/okrieg) 
+	* Ata Turk - [ataturk](https://github.com/ataturk)
+	* Peter Desnoyers
+	* Michael Daitzman
 * Thank you to our classmates who provided us with feedback and kept us on our toes
