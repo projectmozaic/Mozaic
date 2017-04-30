@@ -85,9 +85,10 @@ def configedit(request):
 def imagestudent(request):
     if request.method == 'POST':
         try:
-            imageFile = request.FILES.getlist('fileselect')[0]
+            imageFile = request.FILES.getlist('imageselect')[0]
         except:
             return render(request, 'student.html', {"error":"No image exists"})
+
         py27 = request.POST.getlist('python27')
         py34 = request.POST.getlist('python34')
         rpacks = request.POST.getlist('rcheck')
