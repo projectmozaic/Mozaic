@@ -44,7 +44,35 @@ http://localhost:8000/
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+This can be deployed on an Apache server utilizing the mod_wsgi module. This is how we did our installation, specific to Apache 2.4.7 and mod_wsgi 4.5.15 and under the assumption there are no other websites to be hosted.  
+
+First, install Apache 2.4.7 and other needed packages:
+ ```
+ apt-get install apache2
+ apt-get install libapache2-mod-python
+ apt-get install apache2-dev
+ ```
+
+Once doing so, load the environmental variables so Apache can run doing `source /etc/apache2/envvars`. 
+
+Then follow the instructions to install [mod_wsgi](https://modwsgi.readthedocs.io/en/develop/installation.html).
+
+If it doesn't exist already, on the server create a folder /var/www/html/webApp where webApp contains all of the files that are in /webApp of this repository.
+
+Then do:
+
+```
+cd /var/www/html/webApp
+mv 000-default.conf /etc/apache2/sites-available
+
+sudo service apache2 restart
+```
+
+The site should now be running on port 80 and thus be accessible from a browser by inputting the public floating IP. 
+
+If you ever change the code and want the site to update, you can do so from touching the wsgi.py file.
+
+`touch /var/www/html/webApp/webApp/wsgi.py`
 
 ## Built With
 
