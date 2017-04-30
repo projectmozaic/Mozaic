@@ -82,8 +82,8 @@ RUN apt-get update -q && apt-get install -yqq \\
             tmpDocker.write("ADD "+"./"+file+" /src\n")
             
     #tmpDocker.write("VOLUME /files\n")
-    call(["mv", "commands.py", fileDirectory])
-    tmpDocker.write("ADD commands.py /")
+    call(["cp", "./adminPortal/commands.py", fileDirectory])
+    tmpDocker.write("ADD ./commands.py /")
     tmpDocker.seek(0)
     print tmpDocker.read()
     tmpDocker.close()

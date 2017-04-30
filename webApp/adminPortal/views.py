@@ -41,16 +41,19 @@ def generate(request):
         gitrepo = request.POST.getlist('gitRepo')
         aptget = request.POST.getlist('aptget')
 
+        print(request.FILES)
+        print (request.POST)
         if len(request.FILES.getlist('fileselect')) > 0:
             packageFile = request.FILES.getlist('fileselect')[0];
         else:
             packageFile = ""
 
         fileDirectory = tempfile.mkdtemp()
-        for item in request.FILES.getlist("file[]"):
-            #print item.name
-            with open(fileDirectory+"/"+item.name, 'wb+') as destination:
-                destination.write(item.read())
+        for i in range(len(request.FILES)):
+            for item in request.FILES.getlist("file["+str(i)+"]"):
+                print item.name
+                with open(fileDirectory+"/"+item.name, 'wb+') as destination:
+                    destination.write(item.read())
 
         makeDockerFile(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile)
         request.session['temp'] = fileDirectory
