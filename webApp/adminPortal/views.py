@@ -70,15 +70,17 @@ def process(request):
 
 def configedit(request):
     if request.method == 'POST':
-        text = request.POST.get('configinput')
-        configfile = request.FILES.getlist('fileselect')[0].name;
-        fileDirectory = tempfile.mkdtemp()
-        parseConfig(fileDirectory, text, configfile)
-    return render(request, 'config.html', {})
+        try:
+            text = request.POST.get('configinput')
+            configfile = request.FILES.getlist('fileselect')[0].name;
+            fileDirectory = tempfile.mkdtemp()
+            parseConfig(fileDirectory, text, configfile)
+            return render(request, 'config.html', {})
+        except:
+            return render(request, 'config.html', {"error":"No file exists"})
 
 def imagestudent(request):
     if request.method == 'POST':
-        print "hello there"
         py27 = request.POST.getlist('python27')
         py34 = request.POST.getlist('python34')
         rpacks = request.POST.getlist('rcheck')
