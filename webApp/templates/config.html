@@ -32,23 +32,31 @@
     <br><br>
 </div>
 
+{% if error %}
+<div class="col-md-12">
+  <div class="alert alert-danger">
+    <strong> Error: </strong> {{ error }} 
+  </div>
+</div>
+{% endif %}
+
 <form action="configedit" id="config" method="post" enctype="multipart/form-data">{% csrf_token %}
 
 <div class="col-md-12">
-	<div class="panel panel-default">
-		<div class="panel-heading">Configuration File</div>
-		<div class="panel-body"> 
+  <div class="panel panel-default">
+    <div class="panel-heading">Configuration File</div>
+    <div class="panel-body"> 
         Upload a JSON file to specify the image configuration.
-		<br><br>
+    <br><br>
         <div class="input-group">
           <input type="text" class="form-control" id="packagefile" readonly>
-		  <label class="input-group-btn">
+      <label class="input-group-btn">
             <span class="btn btn-primary" id="filebutton">
                 Open<input id="fileselect" type="file" name="fileselect" style="display:none;">
             </span>
           </label>
         </div>
-	</div>
+  </div>
     </div>
 </div>
 
@@ -64,14 +72,10 @@
     </div>
 </div>
 
+
 <center><button type="submit" form="config" id="create" value="Create">Create</button></center>
 </form>
 
-{% if error %}
-<script>
-window.alert(<%- error %>)
-</script>
-{% endif %}
 
 </body>
 </html>
