@@ -77,3 +77,4 @@ See also the list of [contributors](https://github.com/BU-CS-CE-528-2017/Data-Sc
 	* Peter Desnoyers
 	* Michael Daitzman
 * Thank you to our classmates who provided us with feedback and kept us on our toes
+* Thank you to [PurpleBooth](https://github.com/PurpleBooth) for this README template
