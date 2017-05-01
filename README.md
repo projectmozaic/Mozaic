@@ -74,6 +74,10 @@ If you ever change the code and want the site to update, you can do so from touc
 
 `touch /var/www/html/webApp/webApp/wsgi.py`
 
+## User Portal GUI
+
+To update image, either have the .tar or the image loaded. In the `User Portal` folder, place any files you may want to add to the image (and the tar itself if you don't add it). Then run `python addFiles.py` to launch the GUI.
+
 ## Built With
 
 * [Django](https://www.djangoproject.com//) - The web framework used
