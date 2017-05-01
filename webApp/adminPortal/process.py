@@ -95,6 +95,7 @@ def updateImage(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile,
             retcode = call('docker load -i ' + imageFile.name + '.tar', shell=True)
         else:
             retcode = call('docker load -i ' + imageFile.name, shell=True)
+
         if retcode < 0:
             print >>sys.stderr, "Subprocess was terminated by signal", -retcode2
         else:
@@ -105,7 +106,7 @@ def updateImage(py27, py34, rpacks, gitrepo, aptget, fileDirectory, packageFile,
             files = os.listdir(fileDirectory)
             for file in files:
                 if file != "":
-                    tmpDocker.write('ADD ' + i + ' /\n')
+                    tmpDocker.write('ADD ' + file + ' /\n')
 
                 if (len(packageFile) > 0):
                     #parse csv files
@@ -212,27 +213,40 @@ def parseConfig(fileDirectory, configString, fileName):
         group[key.lower()] = value
     if "python 2.7" in group:
         tmpDocker.write("RUN apt-get install -y python python-dev python-distribute python-pip\n")
-        installs = [item.strip() for item in group["python 2.7"][0].split(",")]
+        try:
+            installs = [item.strip() for item in group["python 2.7"][0].split(",")]
+        except:
+            print "No Python 2.7 packages"
         for package in installs:
             tmpDocker.write("RUN pip "+package.lower()+"\n")
     if "python 3.4" in group:
         tmpDocker.write("RUN apt-get install -y python-pip3\n")
-        installs = [item.strip() for item in group["python 3.4"][0].split(",")]
+        try:
+            installs = [item.strip() for item in group["python 3.4"][0].split(",")]
+        except:
+            print "No Python 3.4 packages"
         for package in installs:
             tmpDocker.write("RUN pip3 " + package + "\n")
-    if "code repo" in group:
-        installs = [item.strip() for item in group["code repo"][0].split(",")]
+    if "coderepo" in group:
+        try:
+            installs = [item.strip() for item in group["coderepo"][0].split(",")]
+        except:
+            print "No code repo"
         for repo in installs:
             url = repo.strip()
             if url != '':
                 tmpDocker.write("RUN git clone "+ url+ "\n")
-    if "data set" in group:
+    if "apt-get" in group:
+        installs = [item.strip() for item in group["apt-get"][0].split(",")]
+        for package in installs:
+            tmpDocker.write("apt-get install " + package + "\n")
+    if "dataset" in group:
         print "data set"
-    if "main command" in group:
+    if "commands" in group:
         print "main command"
             
     #tmpDocker.write("VOLUME /files\n")
-    tmpDocker.write("ADD commands.py /\n")
+    tmpDocker.write("ADD ./adminPortal/commands.py /\n")
     tmpDocker.write("ADD " + fileName + " /")
     tmpDocker.seek(0)
     print tmpDocker.read()

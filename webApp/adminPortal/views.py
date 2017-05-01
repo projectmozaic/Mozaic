@@ -4,6 +4,7 @@ from django.utils.encoding import smart_str
 from django.template import loader
 from .process import makeDockerFile, makeDockerImage, parseConfig, updateImage
 from django.views.static import serve
+import tarfile
 import os
 
 import tempfile
@@ -17,7 +18,13 @@ def index(request):
     return render(request, 'index.html', {})
 
 def config(request):
-    return render(request, 'config.html', {})
+    if request.GET.get("processing"):
+        if request.session['temp']:
+            makeDockerImage(request.session['temp'])
+            return HttpResponse()
+        else:
+            return "Error"
+    return render(request, 'config_process.html')
 
 def student(request):
     return render(request, 'student.html', {})
@@ -73,19 +80,30 @@ def process(request):
 
 def configedit(request):
     if request.method == 'POST':
-        try:
+        #try:
+        if 1:
             text = request.POST.get('configinput')
             configfile = request.FILES.getlist('fileselect')[0].name;
             fileDirectory = tempfile.mkdtemp()
             parseConfig(fileDirectory, text, configfile)
-            return render(request, 'config.html', {})
-        except:
+            request.session['temp'] = fileDirectory
+            return redirect("/config")
+            #return render(request, 'config.html', {})
+        #except:
             return render(request, 'config.html', {"error":"No file exists"})
+    return render(request, 'config.html', {})
+
 
 def imagestudent(request):
     if request.method == 'POST':
         try:
+        #if 1:
             imageFile = request.FILES.getlist('imageselect')[0]
+            fileDirectory = tempfile.mkdtemp()
+            with open(fileDirectory+"/"+imageFile.name, 'wb+') as destination:
+                    destination.write(imageFile.read())
+
+
         except:
             return render(request, 'student.html', {"error":"No image exists"})
 
@@ -99,7 +117,6 @@ def imagestudent(request):
         else:
             packageFile = ""
 
-        fileDirectory = tempfile.mkdtemp()
         if (len(request.FILES.getlist("file[]")) > 0):
             for item in request.FILES.getlist("file[]"):
                 with open(fileDirectory+"/"+item.name, 'wb+') as destination:
